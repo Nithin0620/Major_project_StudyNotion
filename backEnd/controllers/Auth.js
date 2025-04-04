@@ -148,9 +148,60 @@ exports.signUP = async(req,res) =>{
 
 exports.logIN = async(req,res)=>{
    try{
+      const {email,password} = req.body;
 
+      if(!email || !password){
+         return res.status(400).json({
+            success:false,
+            message:"Please fill all the fields",
+         })
+      }
+
+      const USER = await user.findOne({email});
+      if(!USER){
+         return res.status(401).json({
+            success:false,
+            message:"User not registered",
+         })
+      }
+
+      if(await bcrypt.compare(password , USER.password)){
+         const payload = {
+            email: USER.email,
+            id:USER._id,
+            accountType : USER.accountType,
+         }
+         
+         const Token = jwt.sign(payload,process.env.JWT_SECRET,{
+            expiresIn:"2h",
+         });
+         USER.Token = Token;
+         USER.password = undefined; 
+
+         const options = {
+            expires:new Date(Date.now() + 3*24*60*60*1000),
+            httpOnly : true,
+         }
+
+         res.cookie("token",Token,options).status(200).json({
+            success:true,
+            Token,
+            USER,
+            message:"Login Successfull",
+         })
+      }
+      else{
+         return res.status(401).json({
+            success:false,
+            message:'Password is Incorrect',
+         })
+      }
    }
    catch(e){
-      
+      console.log(e);
+      return res.status(500).json({
+         success:false,
+         message:"Login Failed",
+      })
    }
 }
