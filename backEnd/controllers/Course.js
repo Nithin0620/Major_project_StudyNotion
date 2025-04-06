@@ -49,7 +49,7 @@ exports.createCourse = async(req,res)=>{
       })
 
       await User.findByIdAndUpdate(
-         {_id:userId},
+         {_id: instructorDetails._id,},
          { $push:{courses:newCourse.id}},
          {new:true},
       );
@@ -77,10 +77,19 @@ exports.createCourse = async(req,res)=>{
 }
 
 
-exports.showAllCourses = async(req,res)=>{
+exports.getAllCourses = async(req,res)=>{
 
    try{
-      const allCourses = await Course.find({});
+      const allCourses = await Course.find({} , {
+         courseName: true,
+         price: true,
+         thumbnail: true,
+         instructor: true,
+         ratingAndReviews: true,
+         studentsEnroled: true,
+      })
+      .populate("instructor")
+      .exec();
       
       return res.status(200).json({
           success:true,

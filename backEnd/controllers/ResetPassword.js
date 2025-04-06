@@ -14,7 +14,7 @@ exports.resetPasswordToken = async(req,res)=>{
             message:"user not registered",
          })
       }
-      const token = crypto.randomUUID();
+		const token = crypto.randomBytes(20).toString("hex");
 
       const updateDetails = await user.findOneAndUpdate({email:email},{token:token,resetPasswordExpires:Date.now()+5*60*1000},{new:true});
 
