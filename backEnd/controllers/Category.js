@@ -1,4 +1,4 @@
-const Category = require("../models/Categories");
+const Category = require("../models/Category");
 
 //create Category ka handler funciton
 
