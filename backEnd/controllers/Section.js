@@ -1,55 +1,101 @@
-const Tag = require("../models/Tags");
+const Section = require("../models/Section");
+const Course = require("../models/Course");
 
-exports.createTag = async(req,res)=>{
-
+exports.createSection = async(req,res)=>{
    try{
-      const {name,description} = req.body;
+      const {sectionName , courseId} = req.body;
 
-      if(!name || !description){
+      if(!sectionName , !courseId){
          return res.status(401).json({
             success:false,
-            message:"Please fill all the fields",
+            message:"All fields are required",
          })
       }
 
-      const tagDetails = await Tag.create({
-         name:name,
-         description:description,
-      })
-      console.log("tagDetails : ", tagDetails);
+      const newSection = await Section.create({sectionName});
+      const updatedCourseDetails = await Section.findByIdAndUpdate(
+                                          courseId,
+                                          {
+                                             $push :{
+                                                courseContent : newSection._id,
+                                             }
+                                          },
+                                       {new:true})
+                                       .populate({
+                                          path:"courseContent",
+                                          populate:{
+                                             path:"subSection",
+                                          },
+                                       })
+      
       return res.status(200).json({
          success:true,
-         message:"Tag created Successfully",
+         message:"new Course created successfully",
       })
    }
    catch(e){
       return res.status(500).json({
-         success:false,
-         message:"Something went wrong while creating the tag",
+         succes:false,
+         message:"error occured during creating new course",
       })
    }
 }
 
 
-exports.showAlltags = async(req,res)=>{
+exports.updateSection = async(req,res)=>{
    try{
-      const Tags = await find({},{name:true , description:true});
-      if(!Tags){
+      const {sectionName , courseId} = req.body;
+
+      if(!sectionName , !courseId){
          return res.status(401).json({
             success:false,
-            message:"No tags found",
+            message:"Missing Fields",
          })
       }
+
+      const section = await Section.findByIdAndUpdate(courseId,
+                                                      {sectionName},
+                                                      {new:true},
+      )
+
       return res.status(200).json({
          success:true,
-         message:"Tags fetched Successfully",
-         Tags:Tags,
+         message:'Section Updated Successfully',
+     });
+
+ }
+ catch(error) {
+     return res.status(500).json({
+         success:false,
+         message:"Unable to update Section, please try again",
+         error:error.message,
+     });
+ }
+}
+
+
+
+exports.deleteSection = async(req,res)=>{
+   try{
+      const {sectionId} = req.params;
+
+      await Section.findByIdAndDelete(sectionId) ;
+
+      //TODO[Testing]: do we need to delete the entry from the course schema ??
+
+
+      return res.status(200).json({
+         success:true,
+         message:"Section Deleted Successfully",
       })
+
+
    }
-   catch(e){
+   catch(error) {
       return res.status(500).json({
          success:false,
-         messag:"Something went wrong while fetching the tags",
-      })
+         message:"Unable to delete Section, please try again",
+         error:error.message,
+      });
    }
 }
