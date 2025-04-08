@@ -67,14 +67,7 @@ exports.signUP = async (req, res) => {
       otp,
     } = req.body;
 
-    if (
-      !firstName ||
-      !lastName ||
-      !email ||
-      !password ||
-      !confirmPassword ||
-      !otp
-    ) {
+    if (!firstName || !lastName || !email || !password || !confirmPassword || !otp) {
       return res.status(403).json({
         success: false,
         message: "Please Fill all the fields",
@@ -96,9 +89,7 @@ exports.signUP = async (req, res) => {
       });
     }
 
-    const recentOtp = await OTP.find({ email })
-      .sort({ createdAt: -1 })
-      .limit(1);
+    const recentOtp = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
     console.log(recentOtp);
 
     if (recentOtp.length === 0) {

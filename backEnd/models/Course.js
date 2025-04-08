@@ -45,9 +45,16 @@ const courseSchema = new mongoose.Schema({
          ref:"User",
       }
    ],
-   tags:{
+   tag:{
       type:String,
    },
+   instructions: {
+		type: [String],
+	},
+	status: {
+		type: String,
+		enum: ["Draft", "Published"],
+	},
 });
 
 

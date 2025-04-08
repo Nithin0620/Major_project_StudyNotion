@@ -42,14 +42,14 @@ exports.createCourse = async(req,res)=>{
          courseName,
          courseDescription,
          instructor:insturctorDetails._id,
-         Price,
+         Price, 
          whatYouWillLearn:whatYouWillLearn,
          category:categoryDetails._id,
          thumbnail:thumbnailImage.secure_url,
       })
 
       await User.findByIdAndUpdate(
-         {_id: instructorDetails._id,},
+         {_id: insturctorDetails._id,},
          { $push:{courses:newCourse.id}},
          {new:true},
       );
@@ -103,5 +103,58 @@ exports.getAllCourses = async(req,res)=>{
          message:"Something went wrong while fetching the courses",
          error:e.message,
       })
+   }
+}
+
+
+exports.getCourseDetails = async (req,res)=>
+{
+   try{
+      const {courseId} = req.body;
+      const courseDetails = await Course.findById(courseId)
+                                                .populate(
+                                                   {
+                                                      path:"instructor",
+                                                      populate:{
+                                                         path:"additionalDetails",
+                                                      },
+                                                   }
+
+                                                )
+                                                .populate(
+                                                   "category"
+                                                ).populate(
+                                                   "ratingAndreviews"
+                                                ).populate(
+                                                   {
+                                                      path:"courseContent",
+                                                      populate:{
+                                                         path:"subSection",
+                                                      },
+                                                   }
+                                                ).exec();
+                                             
+      if(!courseDetails){
+         return res.status(400).json({
+            success:false,
+            message:`could not find Any course with courseID : ${courseId}`,
+         })
+      }
+
+      return res.status(200).json({
+         success:true,
+         message:"course Details fetched successFully",
+         data:courseDetails,
+      })
+      
+   }
+   catch(e){
+
+      console.log(error);
+      return res.status(500).json({
+         success:false,
+         message:error.message,
+      });
+  
    }
 }
