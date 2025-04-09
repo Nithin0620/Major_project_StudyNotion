@@ -21,7 +21,6 @@ const ratingAndReviewsSchema = new mongoose.Schema({
       ref:"Course",
       index:true,
    },
-   
 });
 
 
