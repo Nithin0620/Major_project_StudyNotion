@@ -16,6 +16,8 @@ exports.createCourse = async(req,res)=>{
          return res.status(401).json({
             success:false,
             message:"Please fill all the fields",
+            details:{ courseName , courseDescription , thumbnail , Price, category , whatYouWillLearn},
+
          })
       }
 
@@ -72,6 +74,7 @@ exports.createCourse = async(req,res)=>{
       return res.status(500).json({
          success:false,
          message:"Something went wrong while creating the course",
+         error:e.message,
       })
    }
 }
@@ -107,33 +110,29 @@ exports.getAllCourses = async(req,res)=>{
 }
 
 
-exports.getCourseDetails = async (req,res)=>
-{
-   try{
+exports.getCourseDetails = async (req,res) => {
+   try {
       const {courseId} = req.body;
-      const courseDetails = await Course.findById(courseId)
-                                                .populate(
-                                                   {
-                                                      path:"instructor",
-                                                      populate:{
-                                                         path:"additionalDetails",
-                                                      },
-                                                   }
+      const courseDetails = await Course.find(
+         {_id:courseId})
+         .populate(
+             {
+                 path:"instructor",
+                 populate:{
+                     path:"additionalDetails",
+                 },
+             }
+         )
+         .populate("category")
+         //.populate("ratingAndreviews")
+         .populate({
+             path:"courseContent",
+             populate:{
+                 path:"subSection",
+             },
+         })
+         .exec();
 
-                                                )
-                                                .populate(
-                                                   "category"
-                                                ).populate(
-                                                   "ratingAndreviews"
-                                                ).populate(
-                                                   {
-                                                      path:"courseContent",
-                                                      populate:{
-                                                         path:"subSection",
-                                                      },
-                                                   }
-                                                ).exec();
-                                             
       if(!courseDetails){
          return res.status(400).json({
             success:false,
@@ -150,11 +149,51 @@ exports.getCourseDetails = async (req,res)=>
    }
    catch(e){
 
-      console.log(error);
+      console.log(e);
       return res.status(500).json({
          success:false,
-         message:error.message,
+         message:e.message,
       });
   
    }
 }
+
+
+exports.deleteAccount = async(req,res) => {
+   try {
+      const id = req.user.id;
+      const userDetails = await User.findById(id);
+
+      if(!userDetails) {
+         return res.status(404).json({
+            success: false,
+            message: "User not found",
+         });
+      }
+
+      // Delete profile
+      await Profile.findByIdAndDelete(userDetails.additionalDetails);
+      
+      // Delete user
+      await User.findByIdAndDelete(id);
+
+      // Clear the token cookie
+      res.clearCookie("token");
+
+      return res.status(200).json({
+         success: true,
+         message: 'User deleted successfully',
+      });
+   }
+   catch(error) {  // Changed from 'e' to 'error' to match variable name
+      return res.status(500).json({
+         success: false,
+         message: 'User cannot be deleted successfully',
+         error: error.message,  // Changed from e.message to error.message
+      });
+   }
+};
+
+
+// a functionality in add course that onece created it will go into draft then after creating all the section and subsection
+//  it will be inserted into stack and once approved by atleast one Admin it will be puublished

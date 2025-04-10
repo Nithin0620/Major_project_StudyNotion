@@ -51,16 +51,19 @@ const PasswordResetLinktamplet = (url) => {
       font-size: 12px;
       color: #a9a9a9;
     }
-      .h1{
-         background-color:FFD60A;
+      .header{
+         background-color: #FFD60A;
          text-align:center;
+         color:#FEF9F3;
          border-radius : 10px;
+         width:400px;
+         margin-left:60px;
       }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Password Reset Request</h1>
+    <h1 class="header">Password Reset Request</h1>
     <p>Hello,</p>
     <p>We received a request to reset your password. If you made this request, please click the button below to reset your password:</p>
     <a href="${ url }" class="button">Reset Password</a>

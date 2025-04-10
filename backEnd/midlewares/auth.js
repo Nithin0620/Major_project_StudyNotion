@@ -37,6 +37,7 @@ exports.auth = async(req,res,next)=>{
 
 exports.isStudent = async(req,res,next) =>{
    try{
+      // console.log("Printing account type: " ,req.user.accountType)
       if(req.user.accountType !== "Student"){
          return res.status(401).json({
             success:false,
@@ -55,6 +56,8 @@ exports.isStudent = async(req,res,next) =>{
 
 exports.isAdmin = async(req,res,next) =>{
    try{
+      console.log("Printing account type: " ,req.user.accountType)
+
       if(req.user.accountType !== "Admin"){
          return res.status(401).json({
             success:false,
@@ -73,6 +76,8 @@ exports.isAdmin = async(req,res,next) =>{
 
 exports.isInstructor = async(req,res,next) =>{
    try{
+      console.log("Printing account type: " ,req.user.accountType)
+
       if(req.user.accountType !== "Instructor"){
          return res.status(401).json({
             success:false,
