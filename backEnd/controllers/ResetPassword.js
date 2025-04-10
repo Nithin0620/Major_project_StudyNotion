@@ -1,6 +1,8 @@
 const user = require("../models/User");
 const mailsender = require("../utils/mailSender");
 const bcrypt = require("bcrypt");
+const crypto = require("crypto");
+const PasswordResetLinktamplet = require("../mail/tamplets/PasswordResetLink")
 
 exports.resetPasswordToken = async (req, res) => {
   try {
@@ -27,7 +29,7 @@ exports.resetPasswordToken = async (req, res) => {
     await mailsender(
       email,
       "password Reset Link",
-      `your password Reset Link: ${url}`
+      PasswordResetLinktamplet(url),
     );
 
     return res.status(200).json({
@@ -38,6 +40,7 @@ exports.resetPasswordToken = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Something went wrong while sending the email",
+      error:e.message,
     });
   }
 };
@@ -83,6 +86,7 @@ exports.resetPassword = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "password Updated SuccessFully",
+      password: password,
     });
   } catch (e) {
     return res.status(500).json({

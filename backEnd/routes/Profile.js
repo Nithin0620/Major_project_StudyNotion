@@ -6,14 +6,14 @@ const {auth} = require("../midlewares/auth");
 const{
    deleteAccount,
    updateProfile,
-   getAllUserDetails,
+   getUserDetails,
    updateDisplayPicture,
    getEnrolledCourses,
 } = require("../controllers/Profile");
 
-router.delete("/deleteProfile" , deleteAccount);
+router.delete("/deleteProfile" ,auth , deleteAccount);
 router.put ("/updateProfile" , auth , updateProfile);
-router.get("/getUserDeltails" , auth , getAllUserDetails);
+router.get("/getUserDetails" , auth , getUserDetails);
 
 router.get("/getEnrolledCourses" , auth , getEnrolledCourses);
 router.put("/updateDisplayPicture",auth,updateDisplayPicture);

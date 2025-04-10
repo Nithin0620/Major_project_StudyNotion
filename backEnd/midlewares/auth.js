@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 exports.auth = async(req,res,next)=>{
    try{
-      const token = req.headers("Authorization").replace("Bearer ","") || req.body.token || req.cookies.token;
+      const token = req.headers["Authorization"]?.replace("Bearer ","") || req.body.token || req.cookies.token;
       if(!token){
          return res.status(401).json({
 

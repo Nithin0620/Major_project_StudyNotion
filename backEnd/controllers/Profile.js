@@ -1,5 +1,6 @@
 const Profile = require("../models/Profile");
 const User = require("../models/User");
+const {uploadImageToCloudinary} = require("../utils/imageUploader")
 
 exports.updateProfile = async(req,res)=>{
    try{
@@ -9,7 +10,7 @@ exports.updateProfile = async(req,res)=>{
 
       if(!contactNumber , !id , !gender){
          return res.status(400).json({
-            success:fasle,
+            success:false,
             message:"all fields Are Required",
          })
       }
@@ -69,13 +70,14 @@ exports.deleteAccount = async(req,res)=>{
    catch(error) {
       return res.status(500).json({
          success:false,
-         message:'User cannot be deleted successfully',
+         messagrrore:'User cannot be deleted successfully',
+         error:e.message,
       });
    }
 };
 
 
-exports.getAllUserDetails = async (req, res) => {
+exports.getUserDetails = async (req, res) => {
 
    try {
        //get id
@@ -87,6 +89,7 @@ exports.getAllUserDetails = async (req, res) => {
        return res.status(200).json({
            success:true,
            message:'User Data Fetched Successfully',
+           userDetails:userDetails,
        });
       
    }
