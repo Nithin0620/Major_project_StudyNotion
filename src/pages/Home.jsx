@@ -58,10 +58,90 @@ const Home = () => {
          </div>
 
 
+         {/* {code section 1} */}
          <div>
+            <CodeBlocks
+               position={"lg:flex-row"}
+               heading={
+                  <div className='text-4xl font-semibold'>
+                     unlock Your
+                     <HighlightText text={"coding potential"}/>
+                     with our online courses
+                  </div>
+               }
+                  
+               subheading = {
+                  "Our courses are designed and taught by industry experts who have years of experience in coding and are passionate about sharing their knowledge with you."
+               }
 
+               ctabtn1={
+                  {
+                     btnText: "try it yourself",
+                     linkto: "/signup",
+                     active : true,
+                  }
+               }
+
+               ctabtn2={
+                  {
+                     btnText: "learn more",
+                     linkto: "/login",
+                     active : false,
+                  }
+               }
+
+               codeblock={``}
+               codeColor={"text-yellow-25"}
+               
+            />
          </div>
+
+         {/* {code Section 2} */}
+         <div>
+            <CodeBlocks
+               position={"lg:flex-row-reverse"}
+               heading={
+                  <div className='text-4xl font-semibold'>
+                     unlock Your
+                     <HighlightText text={"coding potential"}/>
+                     with our online courses
+                  </div>
+               }
+                  
+               subheading = {
+                  "Our courses are designed and taught by industry experts who have years of experience in coding and are passionate about sharing their knowledge with you."
+               }
+
+               ctabtn1={
+                  {
+                     btnText: "try it yourself",
+                     linkto: "/signup",
+                     active : true,
+                  }
+               }
+
+               ctabtn2={
+                  {
+                     btnText: "learn more",
+                     linkto: "/login",
+                     active : false,
+                  }
+               }
+
+               codeblock={``}
+               codeColor={"text-yellow-25"}
+               
+            />
+         </div>
+
       </div>
+
+      {/* {section 2} */}
+
+      {/* {section 3} */}
+
+      {/* {Footer} */}
+
     </div>
   )
 }
