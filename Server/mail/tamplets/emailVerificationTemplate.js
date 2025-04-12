@@ -68,7 +68,7 @@ const otpTemplate = (otp) => {
 		}
 
 		.cta-button:hover {
-			background-color: #facc15;
+			background-color: #000435;
 		}
 
 		.support {
@@ -87,12 +87,12 @@ const otpTemplate = (otp) => {
 <body>
 	<div class="container">
 		<a href="https://studynotion-edtech-project.vercel.app">
-			<img class="logo" src="https://api.dicebear.com/5.x/initials/svg?seed=Study Notion" alt="StudyNotion Logo">
+			<img class="logo" src="https://res.cloudinary.com/dii5njq9f/image/upload/v1744377710/Logo-Small-Light_ve8rdn.png" alt="StudyNotion Logo">
 		</a>
 		<div class="heading">Verify Your Email</div>
 		<div class="body-text">
-			<p>Hello Learner,</p>
-			<p>Thank you for joining <strong>StudyNotion</strong>. To secure your account and complete registration, please use the OTP below:</p>
+			<p>Dear User,</p>
+			<p>Thank you for registering with <strong>StudyNotion</strong>. To secure your account and complete registration, please use the OTP below:</p>
 		</div>
 		<div class="otp-box">${otp}</div>
 		<div class="body-text">
