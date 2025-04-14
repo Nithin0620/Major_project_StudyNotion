@@ -35,3 +35,7 @@ html, body {
    background: linear-gradient(118.19deg, #1fa2ff -3.62%, #12d8fa 50.44%, #64cf91 104.51%);
    position: absolute;
 }
+
+.homepage_bg {
+   background: url("../src/assets/Images/bghome.svg");
+}
