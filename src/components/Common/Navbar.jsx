@@ -3,14 +3,12 @@ import logo from "../../assets/Logo/Logo-Full-Light.png"
 import { Link, useLocation } from 'react-router-dom'
 import { NavbarLinks } from "../../data/navbar-links"
 import { useSelector } from 'react-redux'
-import { IoIosArrowDropdownCircle } from "react-icons/io"
-import { apiConnector } from '../../services/apiconnector'
-import { categories } from '../../services/apis'
+import { IoIosArrowDown } from "react-icons/io"
+import { categories } from '../../Services/apis'
 import { matchPath } from 'react-router-dom'
 import profileDropDown from "../core/Auth/profileDropDown"
 import {AiOutlineShoppingCart} from "react-icons/ai"
-import { useLocation } from 'react-router-dom'
-import { apiConnector } from '../../services/apiconnector'
+import { apiConnector } from '../../Services/apiConnector'
 
 
 const Navbar = () => {
@@ -36,28 +34,28 @@ const Navbar = () => {
       fetchSublinks();
    }, [])
 
-   const matchRoute = (route) => {
-      return matchPath({path: route}, location.pathname);
+   function matchRoute(route){
+      return matchPath(route, location.pathname);
    }
 
    return (
-      <div className='flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700'>
+      <div className='flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 mt-1'>
          <div className='flex w-11/12 max-w-maxContent items-start justify-between'>
             <Link to="/">
-               <img src={logo} width={160} height={42} loading='lazy' alt="" />
+               <img src={logo} width={160} height={42} loading='lazy' alt="" className='mt-1'/>
             </Link>
 
             <nav>
-               <ul className='flex gap-x-6 text-richblack-25'>
+               <ul className='flex gap-x-6 text-richblack-25 mt-[0.50rem]'>
                   {
                      NavbarLinks.map((link , index)=>{
                         return(
                            <li key={index}>
                               {
-                                 link.title === "catalog" ? (
-                                    <div className='relative flex items-center gap-2 group'>
+                                 link.title === "Catalog" ? ( // Changed from "catalog" to "Catalog"
+                                    <div className='relative flex items-center gap-2 group hover:text-rose-50'>
                                        <p>{link.title}</p>
-                                       <IoIosArrowDropdownCircle/>
+                                       <IoIosArrowDown />
 
                                        <div className='invisible absolute left-[50%] translate-x-[-50%]
                                              translate-y-[80%] top-[50%] flex flex-col rounded-md bg-richblack-5 p-4 text-richblack-900
@@ -82,7 +80,7 @@ const Navbar = () => {
                                     </div>
                                  ) : (
                                     <Link to={link?.path}>
-                                    <p className={`${matchRoute(link.path)? "text-yellow-25" : "text-richblack-25"}`}>
+                                    <p className={`${matchRoute(link.path)? "text-yellow-25" : "text-richblack-25"} hover:text-rose-50`}>
                                        {link.title}
                                        </p></Link>
                                  )
@@ -97,7 +95,7 @@ const Navbar = () => {
 
 
         {/* Login/SignUp/Dashboard */}
-         <div className='flex gap-4 items-center'>
+         <div className='flex gap-4 items-center '>
             {
                user && user?.accountType !== "Instructor" &&(
                   <Link to="/dashboard/cart" className='relative'>
@@ -115,7 +113,7 @@ const Navbar = () => {
             {
                token === null && (
                   <Link to="/login">
-                     <button className='border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100 rounded-md'>
+                     <button className='border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] hover:bg-[#0d0d0d] text-richblack-100 rounded-md'>
                         Log In
                      </button>
                   </Link>

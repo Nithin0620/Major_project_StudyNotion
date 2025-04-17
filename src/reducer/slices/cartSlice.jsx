@@ -28,7 +28,7 @@ const cartSlice = createSlice({
          state.total += course.price;
 
          localStorage.setItem("cart",JSON.stringify(state.cart))
-         localStrorage.setItem("total",JSON.stringify(state.total))
+         localStorage.setItem("total",JSON.stringify(state.total))
          localStorage.setItem("totalItems",JSON.stringify(state.totalItems))
 
          toast.success("Item added to Cart Successfully")
@@ -45,7 +45,7 @@ const cartSlice = createSlice({
             state.cart.splice(index,1)
 
             localStorage.setItem("cart",JSON.stringify(state.cart))
-            localStrorage.setItem("total",JSON.stringify(state.total))
+            localStorage.setItem("total",JSON.stringify(state.total))
             localStorage.setItem("totalItems",JSON.stringify(state.totalItems))
 
             toast.success("Item removed from Cart Successfully")

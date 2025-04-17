@@ -38,19 +38,25 @@ const TimelineSection = () => {
             {
                timeLine.map((element , index)=>{
                   return (
-                     <div 
-                        key={index}
-                        className='flex gap-6'
-                     >
-                        <div className='w-[60px] h-[60px] bg-teal-100 flex flex-col justify-center rounded-full items-center'>
-                           <img src={element.Logo} alt="" className='flex flex-col items-center h-[24px]'/>
-                        </div>
+                    <div>
+                         <div 
+                           key={index}
+                           className='flex gap-6'
+                        >
+                           <div className='w-[60px] h-[60px] bg-teal-100 flex flex-col justify-center bg-rose-50 rounded-full items-center'>
+                              <img src={element.Logo} alt="" className='flex flex-col items-center h-[24px]'/>
+                           </div>
 
-                        <div>
-                           <h2 className='font-semibold text-[18px]'>{element.heading}</h2>
-                           <p className='text-base'>{element.Description}</p>
+                           <div>
+                              <h2 className='font-semibold text-[18px]'>{element.heading}</h2>
+                              <p className='text-base'>{element.Description}</p>
+                           </div>
                         </div>
-                     </div>
+                        <div className={` ${index!== 3? ("bg-richblack-25 opacity-70 w-[1px] h-[50px] mt-4 ml-7 mb-[-10px]") : ("")}`}>
+
+                        </div>
+                    </div>
+                     
                   )
                })
             }
