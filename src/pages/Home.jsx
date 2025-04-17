@@ -16,8 +16,8 @@ const Home = () => {
   return (
     <div>
       <div
-        className=" font-inter relative mx-auto flex flex-col w-11/12 max-w-maxContent items-center
-      text-white justify-between"
+        className='relative mx-auto flex flex-col w-11/12 max-w-maxContent items-center 
+      text-white justify-between'
       >
         <Link to={"/signup"}>
           <div
@@ -126,7 +126,7 @@ const Home = () => {
       </div>
 
       {/* {section 2} */}
-      <div className="bg-pure-greys-5 text-richblack-700">
+      <div className="bg-pure-greys-5 text-richblack-700 mt-20">
         <div className="homepage_bg h-[310px]">
 
           <div className="w-11/12 max-w-maxContent flex flex-col items-center justify-betweengap-5 mx-auto">
