@@ -17,7 +17,7 @@ const Navbar = () => {
    const {totalItems} = useSelector((state) => state.cart);
    const location = useLocation();
 
-   const [subLinks, setSubLinks] = useState([]);
+   const [subLinks, setSubLinks] = useState([{title:"Web Development", link:"/"},{title:"Machine Learning",link:"/"}]);
 
    const fetchSublinks = async() => {
       try {
@@ -39,7 +39,7 @@ const Navbar = () => {
    }
 
    return (
-      <div className='flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 mt-1'>
+      <div className='flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 mt-1 transition-all duration-150'>
          <div className='flex w-11/12 max-w-maxContent items-start justify-between'>
             <Link to="/">
                <img src={logo} width={160} height={42} loading='lazy' alt="" className='mt-1'/>
@@ -53,12 +53,12 @@ const Navbar = () => {
                            <li key={index}>
                               {
                                  link.title === "Catalog" ? ( 
-                                    <div className='relative flex items-center gap-2 group hover:text-rose-50'>
+                                    <div className='relative flex items-center gap-2 group hover:text-rose-50 z-10 '>
                                        <p>{link.title}</p>
                                        <IoIosArrowDown />
 
-                                       <div className='invisible absolute left-[50%] translate-x-[-50%]
-                                             translate-y-[80%] top-[50%] flex flex-col rounded-md bg-richblack-5 p-4 text-richblack-900
+                                       <div className='invisible absolute left-[50%] translate-x-[-49%]
+                                             translate-y-[30%] top-[50%] flex flex-col rounded-md bg-richblack-5 p-4 text-richblack-900
                                              opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 lg:w-[300px]'>
                                                
                                              <div className='absolute left-[50%] top-0 translate-x-[80%] translate-y-[-45%]
@@ -68,8 +68,8 @@ const Navbar = () => {
                                                 subLinks.length? (
                                                    subLinks.map((subLinks , index)=>{
                                                       return(
-                                                         <Link to={`${subLinks.link}`} key={index}>
-                                                            <p>{subLinks.title}</p>
+                                                         <Link to={`${subLinks.link}`} key={index} className='border-b-[1px] border-pure-greys-200'>
+                                                            <p className='text-pure-greys-600 font-medium hover:scale-[102%] transition-all duration-120 scroll-smooth hover:text-black pb-2 pt-2 pl-5'>{subLinks.title}</p>
                                                          </Link>
                                                       )
                                                    })
@@ -112,7 +112,7 @@ const Navbar = () => {
             {
                token === null && (
                   <Link to="/login">
-                     <button className='border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] hover:bg-[#0d0d0d] text-richblack-100 rounded-md'>
+                     <button className='border border-richblack-700 bg-richblack-800 transition-all duration-200 px-[12px] py-[8px] hover:bg-richblack-900 text-richblack-100 rounded-md'>
                         Log In
                      </button>
                   </Link>
@@ -121,7 +121,7 @@ const Navbar = () => {
             {
                token === null && (
                   <Link to="/signup">
-                     <button className='border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100 rounded-md'>
+                     <button className='border border-richblack-700 bg-richblack-800 transition-all duration-200 hover:bg-richblack-900 px-[12px] py-[8px] text-richblack-100 rounded-md'>
                         Sign Up
                      </button>
                   </Link>
