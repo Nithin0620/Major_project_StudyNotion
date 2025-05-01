@@ -3,3 +3,5 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=New+Tegomin&family=Playwrite+AU+SA:wght@300&family=Roboto:ital,wght@0,300;1,300&display=swap');

@@ -53,7 +53,7 @@ const Navbar = () => {
                            <li key={index}>
                               {
                                  link.title === "Catalog" ? ( 
-                                    <div className='relative font-bold font-mono text-lg flex items-center gap-2 group hover:text-rose-50 z-10 '>
+                                    <div className='relative font-roboto text-lg font-medium flex items-center gap-2 group hover:text-rose-50 z-10 '>
                                        <p>{link.title}</p>
                                        <IoIosArrowDown />
 
@@ -79,7 +79,7 @@ const Navbar = () => {
                                     </div>
                                  ) : (
                                     <Link to={link?.path}>
-                                    <p className={`${matchRoute(link.path)? "text-yellow-25" : "text-richblack-25"} hover:text-rose-50 font-mono text-lg font-bold`}>
+                                    <p className={`${matchRoute(link.path)? "text-yellow-25" : "text-richblack-25"} hover:text-rose-50 font-roboto text-lg font-medium`}>
                                        {link.title}
                                        </p></Link>
                                  )
