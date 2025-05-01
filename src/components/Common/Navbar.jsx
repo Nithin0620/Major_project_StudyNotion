@@ -94,7 +94,7 @@ const Navbar = () => {
 
 
         {/* Login/SignUp/Dashboard */}
-         <div className='flex gap-4 items-center '>
+         <div className='flex gap-4 items-center transition-all duration-200'>
             {
                user && user?.accountType !== "Instructor" &&(
                   <Link to="/dashboard/cart" className='relative'>
@@ -112,7 +112,7 @@ const Navbar = () => {
             {
                token === null && (
                   <Link to="/login">
-                     <button className='border border-richblack-700 bg-richblack-800 transition-all duration-200 px-[12px] py-[8px] hover:bg-richblack-900 text-richblack-100 rounded-md'>
+                     <button className={`${matchRoute("login")? "text-yellow-25" : "text-richblack-100"} border border-richblack-700 bg-richblack-800 transition-all duration-200 px-[12px] py-[8px] hover:bg-richblack-900 text-richblack-100 rounded-md`}>
                         Log In
                      </button>
                   </Link>
@@ -121,7 +121,7 @@ const Navbar = () => {
             {
                token === null && (
                   <Link to="/signup">
-                     <button className='border border-richblack-700 bg-richblack-800 transition-all duration-200 hover:bg-richblack-900 px-[12px] py-[8px] text-richblack-100 rounded-md'>
+                     <button className={`${matchRoute("signup")? "text-yellow-25" : "text-richblack-100"} border border-richblack-700 bg-richblack-800  transition-all duration-200 hover:bg-richblack-900 px-[12px] py-[8px]  rounded-md`}>
                         Sign Up
                      </button>
                   </Link>

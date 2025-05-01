@@ -1,7 +1,7 @@
 import signupImg from "../assets/Images/signup.webp"
 import Template from "../components/core/Auth/Template"
 
-function Login(){
+function signup(){
    return(
       <Template
          title="Join the millions learning to code with StudyNotion for free"
@@ -14,4 +14,4 @@ function Login(){
 }
 
 
-export default Login
+export default signup
