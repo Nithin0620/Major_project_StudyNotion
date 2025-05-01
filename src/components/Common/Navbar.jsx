@@ -39,7 +39,7 @@ const Navbar = () => {
    }
 
    return (
-      <div className='flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 mt-1 transition-all duration-150'>
+      <div className='flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 mt-1 transition-all duration-150 '>
          <div className='flex w-11/12 max-w-maxContent items-start justify-between'>
             <Link to="/">
                <img src={logo} width={160} height={42} loading='lazy' alt="" className='mt-1'/>
@@ -53,7 +53,7 @@ const Navbar = () => {
                            <li key={index}>
                               {
                                  link.title === "Catalog" ? ( 
-                                    <div className='relative flex items-center gap-2 group hover:text-rose-50 z-10 '>
+                                    <div className='relative font-bold font-mono text-lg flex items-center gap-2 group hover:text-rose-50 z-10 '>
                                        <p>{link.title}</p>
                                        <IoIosArrowDown />
 
@@ -79,7 +79,7 @@ const Navbar = () => {
                                     </div>
                                  ) : (
                                     <Link to={link?.path}>
-                                    <p className={`${matchRoute(link.path)? "text-yellow-25" : "text-richblack-25"} hover:text-rose-50`}>
+                                    <p className={`${matchRoute(link.path)? "text-yellow-25" : "text-richblack-25"} hover:text-rose-50 font-mono text-lg font-bold`}>
                                        {link.title}
                                        </p></Link>
                                  )

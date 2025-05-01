@@ -21,7 +21,7 @@ const Home = () => {
       >
         <Link to={"/signup"}>
           <div
-            className="group mt-16 p-1 mx-auto rounded-full bg-richblack-800 font-bold text-richblack-200
+            className="group mt-32 p-1 mx-auto rounded-full bg-richblack-800 font-bold text-richblack-200
             transition-all duration-200 hover:scale-95 w-fit"
           >
             <div

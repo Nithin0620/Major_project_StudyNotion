@@ -9,7 +9,7 @@ const Template = ({ title, description1, description2, image, formType }) => {
   const { loading } = useSelector((state) => state.auth);
 
   return (
-    <div className="flex flex-col min-h-[calc(100vh-3.5rem)] place-items-center">
+    <div className="flex flex-col min-h-[calc(100vh-3.5rem)] place-items-center mt-32">
       {loading ? (
         <div className="spinner"></div>
       ) : (
