@@ -52,7 +52,7 @@ const Navbar = () => {
                         return(
                            <li key={index}>
                               {
-                                 link.title === "Catalog" ? ( // Changed from "catalog" to "Catalog"
+                                 link.title === "Catalog" ? ( 
                                     <div className='relative flex items-center gap-2 group hover:text-rose-50'>
                                        <p>{link.title}</p>
                                        <IoIosArrowDown />
@@ -72,7 +72,6 @@ const Navbar = () => {
                                                             <p>{subLinks.title}</p>
                                                          </Link>
                                                       )
-
                                                    })
                                                 ):(<div></div>)
                                              }
