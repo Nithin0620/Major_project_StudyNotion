@@ -39,3 +39,37 @@ html, body {
 .homepage_bg {
    background: url("../src/assets/Images/bghome.svg");
 }
+
+
+.spinner {
+   width: 56px;
+   height: 56px;
+   border: 6.7px solid #66b7ff;
+   animation: spinner-kk2y8v 3s infinite;
+}
+
+@keyframes spinner-kk2y8v {
+   0% {
+      transform: rotate(0deg);
+   }
+
+   10%, 15% {
+      transform: rotate(-90deg);
+   }
+
+   20%, 25% {
+      transform: rotate(-180deg);
+   }
+
+   30%, 35% {
+      transform: rotate(-270deg);
+   }
+
+   40%, 50% {
+      transform: rotate(-360deg);
+   }
+
+   100% {
+      transform: rotate(720deg);
+   }
+}

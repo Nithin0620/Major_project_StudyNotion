@@ -79,7 +79,7 @@ const SignupForm = () => {
     <div className="overflow-y-hidden">
       <Tab tabData={tabData} field={accountType} setField={setAccountType} />
 
-      <form onSubmit={handleOnChange} className="flex w-full flex-col gap-y-4">
+      <form onSubmit={handleOnChange} className="flex w-full flex-col gap-y-4 pr-1">
         <div className="flex flex-col gap-y-4">
           
             <div className="flex gap-4">
@@ -187,7 +187,7 @@ const SignupForm = () => {
                />
 
                <span
-               onClick={() => setShowPassword((prev) => !prev)}
+               onClick={() => setShowConfirmPassword((prev) => !prev)}
                className="absolute right-3 top-[38px] z-[10] cursor-pointer"
                >
                {showConfirmPassword ? (
