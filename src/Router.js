@@ -5,6 +5,9 @@ import NotFound from "./components/core/HomePage/NotFound";
 import OpenRoute from "./components/core/Auth/OpenRoute";
 import Signup from "./pages/Signup"
 import Login from "./pages/Login"
+import ForgotPassword from "../src/pages/ForgotPassword"
+import UpdatePassword from "../src/pages/UpdatePassword"
+import VerifyEmail from "../src/pages/VerifyEmail"
 
 const router = createBrowserRouter([
    {
@@ -26,6 +29,18 @@ const router = createBrowserRouter([
          {
             path : "login",
             element: <OpenRoute> <Login/></OpenRoute>
+         },
+         {
+            path : "forgot-password",
+            element:<OpenRoute><ForgotPassword/></OpenRoute>
+         },
+         {
+            path : "update-password/:id",
+            element:<OpenRoute><UpdatePassword/></OpenRoute>
+         },
+         {
+            path : "verify-email",
+            element:<OpenRoute><VerifyEmail/></OpenRoute>
          }
       ]
    }
