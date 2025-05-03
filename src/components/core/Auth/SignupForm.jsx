@@ -5,7 +5,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { sentOtp } from "../../../Services/operations/authAPI";
+import { sendOtp } from "../../../Services/operations/authAPI";
 import { setSignupData } from "../../../reducer/slices/authSlice";
 import { ACCOUNT_TYPE } from "../../../utils/constants";
 import Tab from "../../Common/Tab";
@@ -50,7 +50,7 @@ const SignupForm = () => {
 
     dispatch(setSignupData(signupData));
 
-    dispatch(sentOtp(formData.email, navigate));
+    dispatch(sendOtp(formData.email, navigate));
 
     setFormData({
       firstName: "",
@@ -79,7 +79,7 @@ const SignupForm = () => {
     <div className="overflow-y-hidden">
       <Tab tabData={tabData} field={accountType} setField={setAccountType} />
 
-      <form onSubmit={handleOnChange} className="flex w-full flex-col gap-y-4 pr-1">
+      <form onSubmit={handleOnSubmit} className="flex w-full flex-col gap-y-4 pr-1">
         <div className="flex flex-col gap-y-4">
           
             <div className="flex gap-4">
