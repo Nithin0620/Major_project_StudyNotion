@@ -69,7 +69,7 @@ const Navbar = () => {
                                                    subLinks.map((subLinks , index)=>{
                                                       return(
                                                          <Link to={`${subLinks.link}`} key={index} className='border-b-[1px] border-pure-greys-200'>
-                                                            <p className='text-pure-greys-600 font-medium hover:scale-[102%] transition-all duration-120 scroll-smooth hover:text-black pb-2 pt-2 pl-5'>{subLinks.title}</p>
+                                                            <p className='text-pure-greys-600 font-medium rounded-lg pt-3 pb-3 hover:bg-richblack-50 hover:scale-[102%] transition-all duration-120 scroll-smooth hover:text-black pl-5'>{subLinks.title}</p>
                                                          </Link>
                                                       )
                                                    })
