@@ -65,7 +65,7 @@ const Navbar = () => {
                                                    h-6 w-6 rotate-45 bg-richblack-5'>
                                              </div>
                                              {
-                                                subLinks.length? (
+                                                subLinks? (
                                                    subLinks.map((subLinks , index)=>{
                                                       return(
                                                          <Link to={`${subLinks.link}`} key={index} className='border-b-[1px] border-pure-greys-200'>

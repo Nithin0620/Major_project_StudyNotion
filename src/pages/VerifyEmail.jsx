@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import otpInput from "react-otp-input";
+import OtpInput from "react-otp-input";
 import { Link } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import { RxCountdownTimer } from "react-icons/rx";
@@ -57,10 +57,10 @@ const VerifyEmail = () => {
             A verification code has been sent to you. Enter the code below
           </p>
           <form onSubmit={handleVerifyAndSignup}>
-            <otpInput
+            <OtpInput
               value={otp}
               onChange={setOtp}
-              numInput={6}
+              numInputs={6}
               renderInput={(props) => (
                 <input
                   {...props}
@@ -71,7 +71,7 @@ const VerifyEmail = () => {
                   className="w-[48px] lg:w-[60px] border-0 bg-richblack-800 rounded-[0.5rem] text-richblack-5 aspect-square text-center focus:border-0 focus:outline-yellow-50"
                 />
               )}
-              constainerStyle={{
+              containerStyle={{
                 justifyContent: "space-between",
                 gap: "0 6px",
               }}

@@ -10,7 +10,7 @@ const {
    SIGNUP_API,
    LOGIN_API,
    RESETPASSTOKEN_API,
-   RESETPASSWORD_API,
+   // RESETPASSWORD_API,
 }= endpoints;
 
 export function sendOtp(email, navigate) {
@@ -69,12 +69,21 @@ export function signUp(
    confirmPassword,
    otp,
    navigate
-){
-   return async(dispatch)=>{
-      const toastId=toast.loading("Loading..");
-      dispatch(setLoading(true))
-      try{
-         const response = await apiConnector("POST",SIGNUP_API,{
+) {
+   return async(dispatch) => {
+      const toastId = toast.loading("Loading...");
+      dispatch(setLoading(true));
+      try {
+         // Validate inputs
+         if(!accountType || !firstName || !lastName || !email || !password || !confirmPassword || !otp) {
+            throw new Error("All fields are required");
+         }
+
+         if(password !== confirmPassword) {
+            throw new Error("Passwords do not match");
+         }
+
+         const response = await apiConnector("POST", SIGNUP_API, {
             accountType,
             firstName,
             lastName,
@@ -82,65 +91,87 @@ export function signUp(
             password,
             confirmPassword,
             otp,
-         })
-         console.log("SIGNUP API RESPONSE............", response)
+         });
 
-         if(!response.data.success){
-            throw new Error(response.data.message)
+         console.log("SIGNUP API RESPONSE............", response);
+
+         if(!response?.data?.success) {
+            throw new Error(response?.data?.message || "Signup Failed");
          }
 
-         toast.success("SignUp Successful")
-         navigate("/login")
+         toast.success("SignUp Successful");
+         navigate("/login");
       }
-      catch(e){
-         console.log("SIGNUP API ERROR............", e)
-         toast.error("SignUp Failed")
-         navigate("/signup")
+      catch(error) {
+         console.log("SIGNUP API ERROR............", error);
+         // More detailed error logging
+         if(error.response) {
+            // Server responded with error status
+            console.log("Error response:", error.response.data);
+            toast.error(error.response.data.message || "Signup Failed");
+         } else if(error.request) {
+            // Request made but no response
+            console.log("No response received:", error.request);
+            toast.error("No response from server. Please check your connection.");
+         } else {
+            // Error in request setup
+            console.log("Error in request:", error.message);
+            toast.error(error.message || "Signup Failed");
+         }
+         navigate("/signup");
       }
-      dispatch(setLoading(false))
-      toast.dismiss(toastId)
+      finally {
+         dispatch(setLoading(false));
+         toast.dismiss(toastId);
+      }
    }
 }
 
-
-export function login(
-   email,password,navigate
-){
-   return async(dispatch)=>{
-      const toastId=toast.loading("Loading..");
+export function login(email, password, navigate) {
+   return async(dispatch) => {
+      const toastId = toast.loading("Loading..");
       dispatch(setLoading(true))
-      try{
-         const response = await apiConnector("POST",LOGIN_API,{
-            email,password
+      try {
+         const response = await apiConnector("POST", LOGIN_API, {
+            email, 
+            password
          })
-         console.log("LOGIN API RESPONSE............", response)
 
-         if(!response.data.success){
-            throw new Error(response.data.message)
+         if(!response?.data?.success) {
+            throw new Error(response?.data?.message || "Login Failed")
          }
 
-         toast.success("LogIn Successful")
-         dispatch(setToken(response.data.token))
+         const token = response?.data?.Token
+         const user = response?.data?.USER
 
-         localStorage.setItem("token",JSON.stringify(response.data.token))
+         if(!token || !user) {
+            throw new Error("Invalid response data")
+         }
 
-         const userImage = response.data?.user?.image ? response.data.user.image 
-                           : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`
+         // Set token in Redux and localStorage
+         dispatch(setToken(token))
+
+         // Generate user image
+         const userImage = user?.image 
+            ? user.image 
+            : `https://api.dicebear.com/5.x/initials/svg?seed=${user.firstName} ${user.lastName}`
          
-         dispatch(setUser({...response.data.user , image:userImage}))
+         // Set user data in Redux
+         dispatch(setUser({ ...user, image: userImage }))
          
+         toast.success("Login Successful")
          navigate("/dashboard/my-profile")
       }
-      catch(e){
-         console.log("LogIn API ERROR............", e)
-         toast.error("LogIn Failed")
-         navigate("/LogIn")
+      catch(error) {
+         console.log("Login API ERROR............", error)
+         toast.error(error.message || "Login Failed")
       }
-      dispatch(setLoading(false))
-      toast.dismiss(toastId)
+      finally {
+         dispatch(setLoading(false))
+         toast.dismiss(toastId)
+      }
    }
 }
-
 
 export function logout (navigate){
    return async (dispatch)=>{
