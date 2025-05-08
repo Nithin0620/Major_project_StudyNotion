@@ -6,9 +6,9 @@ import { useSelector } from 'react-redux'
 import { IoIosArrowDown } from "react-icons/io"
 import { categories } from '../../Services/apis'
 import { matchPath } from 'react-router-dom'
-import ProfileDropDown from "../core/Auth/ProfileDropDown"
 import {AiOutlineShoppingCart} from "react-icons/ai"
 import { apiConnector } from '../../Services/apiConnector'
+import ProfileDropDown from '../core/Auth/ProfileDropDown'
 
 
 const Navbar = () => {
@@ -18,6 +18,8 @@ const Navbar = () => {
    const location = useLocation();
 
    const [subLinks, setSubLinks] = useState([]);
+
+   
 
    const fetchSublinks = async() => {
       try {
