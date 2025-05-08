@@ -137,6 +137,8 @@ export function login(email, password, navigate) {
             password
          })
 
+         console.log("LOGIN API RESPONSE:", response);
+
          if(!response?.data?.success) {
             throw new Error(response?.data?.message || "Login Failed")
          }
@@ -150,7 +152,7 @@ export function login(email, password, navigate) {
 
          // Set token in Redux and localStorage
          dispatch(setToken(token))
-
+         
          // Generate user image
          const userImage = user?.image 
             ? user.image 
@@ -158,7 +160,13 @@ export function login(email, password, navigate) {
          
          // Set user data in Redux with the image
          const userData = { ...user, image: userImage }
+         
+         // Make sure we store the user properly
          dispatch(setUser(userData))
+         
+         // Check localStorage for debugging
+         console.log("After login - token:", localStorage.getItem("token"));
+         console.log("After login - user:", localStorage.getItem("user"));
          
          toast.success("Login Successful")
          navigate("/")

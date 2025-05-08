@@ -13,7 +13,7 @@ import { apiConnector } from '../../Services/apiConnector'
 
 const Navbar = () => {
    const {token} = useSelector((state) => state.auth);
-   const {User} = useSelector((state) => state.profile);
+   const {user} = useSelector((state) => state.profile);
    const {totalItems} = useSelector((state) => state.cart);
    const location = useLocation();
 
@@ -39,7 +39,7 @@ const Navbar = () => {
    }
 
    console.log(token);
-   console.log(User)
+   console.log(user)
 
    return (
       <div className='flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 mt-1 transition-all duration-150 '>
@@ -99,7 +99,7 @@ const Navbar = () => {
         {/* Login/SignUp/Dashboard */}
          <div className='flex gap-4 items-center transition-all duration-200'>
             {
-               User && User?.accountType !== "Instructor" &&(
+               user && user?.accountType !== "Instructor" &&(
                   <Link to="/dashboard/cart" className='relative'>
                      <AiOutlineShoppingCart/>
                      {
