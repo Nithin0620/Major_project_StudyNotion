@@ -22,7 +22,7 @@ const ProfileDropDown = () => {
       return null;
    }
 
-   console.log("ProfileDropDown - user data:", user);
+   // console.log("ProfileDropDown - user data:", user);
 
    return (
     <button className='relative' onClick={() => setOpen(true)}>

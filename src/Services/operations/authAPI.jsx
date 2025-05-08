@@ -10,7 +10,7 @@ const {
    SIGNUP_API,
    LOGIN_API,
    RESETPASSTOKEN_API,
-   // RESETPASSWORD_API,
+   RESETPASSWORD_API,
 }= endpoints;
 
 export function sendOtp(email, navigate) {
@@ -165,8 +165,8 @@ export function login(email, password, navigate) {
          dispatch(setUser(userData))
          
          // Check localStorage for debugging
-         console.log("After login - token:", localStorage.getItem("token"));
-         console.log("After login - user:", localStorage.getItem("user"));
+         // console.log("After login - token:", localStorage.getItem("token"));
+         // console.log("After login - user:", localStorage.getItem("user"));
          
          toast.success("Login Successful")
          navigate("/")
@@ -226,7 +226,7 @@ export function resetPassword(password,confirmPassword , token){
       dispatch(setLoading(true))
 
       try{
-         const response = await apiConnector("POST" , RESETPASSTOKEN_API, {password,confirmPassword,token});
+         const response = await apiConnector("POST" , RESETPASSWORD_API, {password,confirmPassword,token});
 
          console.log("RESET Password RESPONSE ... ", response);
 

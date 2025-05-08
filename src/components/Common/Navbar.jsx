@@ -40,8 +40,8 @@ const Navbar = () => {
       return matchPath(route, location.pathname);
    }
 
-   console.log(token);
-   console.log(user)
+   // console.log(token);
+   // console.log(user)
 
    return (
       <div className='flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 mt-1 transition-all duration-150 '>
@@ -102,7 +102,7 @@ const Navbar = () => {
          <div className='flex gap-4 items-center transition-all duration-200'>
             {
                user && user?.accountType !== "Instructor" &&(
-                  <Link to="/dashboard/cart" className='relative'>
+                  <Link to="/dashboard/cart" className='relative text-caribbeangreen-5 text-2xl mr-3'>
                      <AiOutlineShoppingCart/>
                      {
                         totalItems > 0&& (
