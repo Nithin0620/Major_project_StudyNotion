@@ -6,24 +6,24 @@ import { useSelector } from 'react-redux'
 import { IoIosArrowDown } from "react-icons/io"
 import { categories } from '../../Services/apis'
 import { matchPath } from 'react-router-dom'
-import profileDropDown from "../core/Auth/profileDropDown"
+import ProfileDropDown from "../core/Auth/ProfileDropDown"
 import {AiOutlineShoppingCart} from "react-icons/ai"
 import { apiConnector } from '../../Services/apiConnector'
 
 
 const Navbar = () => {
    const {token} = useSelector((state) => state.auth);
-   const {user} = useSelector((state) => state.profile);
+   const {User} = useSelector((state) => state.profile);
    const {totalItems} = useSelector((state) => state.cart);
    const location = useLocation();
 
-   const [subLinks, setSubLinks] = useState([{title:"Web Development", link:"/"},{title:"Machine Learning",link:"/"}]);
+   const [subLinks, setSubLinks] = useState([]);
 
    const fetchSublinks = async() => {
       try {
          const result = await apiConnector("GET", categories.CATEGORIES_API);
-         console.log("Printing Results", result);
-         setSubLinks(result.data.data);
+         setSubLinks(result.data.allCategories);
+         // console.log("Printing Results", subLinks);
       }
       catch(error) {
          console.log("Could not fetch the category list", error);
@@ -37,6 +37,9 @@ const Navbar = () => {
    function matchRoute(route){
       return matchPath(route, location.pathname);
    }
+
+   console.log(token);
+   console.log(User)
 
    return (
       <div className='flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 mt-1 transition-all duration-150 '>
@@ -58,7 +61,7 @@ const Navbar = () => {
                                        <IoIosArrowDown />
 
                                        <div className='invisible absolute left-[50%] translate-x-[-49%]
-                                             translate-y-[30%] top-[50%] flex flex-col rounded-md bg-richblack-5 p-4 text-richblack-900
+                                             translate-y-[13%] top-[50%] flex flex-col rounded-md bg-richblack-5 p-4 text-richblack-900
                                              opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 lg:w-[300px]'>
                                                
                                              <div className='absolute left-[50%] top-0 translate-x-[80%] translate-y-[-45%]
@@ -66,10 +69,10 @@ const Navbar = () => {
                                              </div>
                                              {
                                                 subLinks? (
-                                                   subLinks.map((subLinks , index)=>{
+                                                   subLinks.map((subLink , index)=>{
                                                       return(
-                                                         <Link to={`${subLinks.link}`} key={index} className='border-b-[1px] border-pure-greys-200'>
-                                                            <p className='text-pure-greys-600 font-medium rounded-lg pt-3 pb-3 hover:bg-richblack-50 hover:scale-[102%] transition-all duration-120 scroll-smooth hover:text-black pl-5'>{subLinks.title}</p>
+                                                         <Link to={`${subLink.link}`} key={index} className='border-b-[1px] border-pure-greys-200'>
+                                                            <p className='text-pure-greys-600 font-mono rounded-lg pt-3 pb-3 hover:bg-richblack-50 hover:scale-[102%] transition-all duration-120 scroll-smooth hover:text-black pl-5'>{subLink.name}</p>
                                                          </Link>
                                                       )
                                                    })
@@ -96,7 +99,7 @@ const Navbar = () => {
         {/* Login/SignUp/Dashboard */}
          <div className='flex gap-4 items-center transition-all duration-200'>
             {
-               user && user?.accountType !== "Instructor" &&(
+               User && User?.accountType !== "Instructor" &&(
                   <Link to="/dashboard/cart" className='relative'>
                      <AiOutlineShoppingCart/>
                      {
@@ -128,7 +131,7 @@ const Navbar = () => {
                )  
             }
             {
-               token !==null && <profileDropDown/>
+               token !==null && <ProfileDropDown/>
             }
          </div>
 

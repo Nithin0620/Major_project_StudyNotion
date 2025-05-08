@@ -8,7 +8,6 @@ import { Link, useNavigate } from "react-router-dom"
 import useOnClickOutside from "../../../hooks/useOnClickOutside"
 import { logout } from "../../../Services/operations/authAPI"
 
-// Changed component name to start with uppercase
 const ProfileDropDown = () => {
    const { user } = useSelector((state) => state.profile)
    const dispatch = useDispatch()

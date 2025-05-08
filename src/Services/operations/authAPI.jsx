@@ -156,11 +156,12 @@ export function login(email, password, navigate) {
             ? user.image 
             : `https://api.dicebear.com/5.x/initials/svg?seed=${user.firstName} ${user.lastName}`
          
-         // Set user data in Redux
-         dispatch(setUser({ ...user, image: userImage }))
+         // Set user data in Redux with the image
+         const userData = { ...user, image: userImage }
+         dispatch(setUser(userData))
          
          toast.success("Login Successful")
-         navigate("/dashboard/my-profile")
+         navigate("/")
       }
       catch(error) {
          console.log("Login API ERROR............", error)
