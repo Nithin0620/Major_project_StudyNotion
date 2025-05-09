@@ -7,7 +7,7 @@ import OpenRoute from "./components/core/Auth/OpenRoute";
 import ForgotPassword from "./pages/ForgotPassword";
 import UpdatePassword from "./pages/UpdatePassword";
 import VerifyEmail from "./pages/VerifyEmail";
-import {About} from "./pages/About";
+import About from "./pages/About"; 
 
 const router = createBrowserRouter([
   {
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
       },
       {
         path: "about",
-        element: <About/>
+        element: <About />
       }
     ]
   }
