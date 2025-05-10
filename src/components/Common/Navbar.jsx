@@ -45,7 +45,7 @@ const Navbar = () => {
    // console.log(user)
 
    return (
-      <div className='flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 mt-1 transition-all duration-150 '>
+      <div className='flex h-14 items-center justify-center border-b-[1px] border-b-richblack-800 mt-1 transition-all duration-150 '>
          <div className='flex w-11/12 max-w-maxContent items-start justify-between'>
             <Link to="/">
                <img src={logo} width={160} height={42} loading='lazy' alt="" className='mt-1'/>
@@ -74,7 +74,7 @@ const Navbar = () => {
                                                 subLinks? (
                                                    subLinks.map((subLink , index)=>{
                                                       return(
-                                                         <Link to={`${subLink.link}`} key={index} className='border-b-[1px] border-pure-greys-200'>
+                                                         <Link to={`${subLink.link}`} key={index} className='border-b-0 border-pure-greys-200'>
                                                             <p className='text-pure-greys-600 font-mono rounded-lg pt-3 pb-3 hover:bg-richblack-50 hover:scale-[102%] transition-all duration-120 scroll-smooth hover:text-black pl-5'>{subLink.name}</p>
                                                          </Link>
                                                       )

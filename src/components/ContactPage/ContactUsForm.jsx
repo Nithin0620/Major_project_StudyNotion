@@ -42,7 +42,7 @@ const ContactUsForm = () => {
    },[reset,isSubmitSuccessful])
 
    return (
-    <form className='flex flex-xol gap-7' 
+    <form className='flex flex-col gap-7' 
     onSubmit={handleSubmit(submitContactForm)}>
       <div className="flex flex-col gap-5 lg:flex-row">
          <div className="flex flex-col gap-2 lg:w-[48%]">
@@ -53,7 +53,7 @@ const ContactUsForm = () => {
             name='firstname'
             id='firstname'
             placeholder='Enter first name'
-            className='form-style'
+            className='form-style '
             {...register("firstname",{required:true})}
           />
 

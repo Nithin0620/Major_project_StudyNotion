@@ -173,7 +173,13 @@ export function login(email, password, navigate) {
       }
       catch(error) {
          console.log("Login API ERROR............", error)
-         toast.error(error.message || "Login Failed")
+         if(error.message === "Request failed with status code 401"){
+            toast.error("Incorrect Password");
+            
+         }
+         else{
+            toast.error("Login Failed")
+         }
       }
       finally {
          dispatch(setLoading(false))
