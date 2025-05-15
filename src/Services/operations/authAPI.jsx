@@ -163,6 +163,7 @@ export function login(email, password, navigate) {
          
          // Make sure we store the user properly
          dispatch(setUser(userData))
+         console.log("user data just after login:",userData)
          
          // Check localStorage for debugging
          // console.log("After login - token:", localStorage.getItem("token"));

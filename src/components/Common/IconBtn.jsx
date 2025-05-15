@@ -2,7 +2,7 @@ import React from 'react'
 
 const IconBtn = ({
    text,
-   onclick,
+   onClick,
    children,
    disabled,
    outline=false,
@@ -12,20 +12,20 @@ const IconBtn = ({
   return (
     <button 
       disabled={disabled}
-      onclick={onclick}
+      onClick={onClick}
       className={`flex items-center ${
-         outline? "border border-yellow-50 bg-transparent": "bg-yellow-50"
+         outline ? "border border-yellow-50 bg-transparent" : "bg-yellow-50"
       } cursor-pointer gap-x-2 rounded-md py-2 px-2 font-semibold text-richblack-900 ${customeClasses}`}
       type={type}
     >
-      {children?(
-         <>
-            <span className={`${outline && "text-yellow-50"}`}>
-               {text}
-            </span>
-            {children}
-         </>
-      ):(text)}
+      {children ? (
+        <>
+          <span className={`${outline ? "text-yellow-50" : "text-richblack-900"}`}>{text}</span>
+          {children}
+        </>
+      ) : (
+        text
+      )}
     </button>
   )
 }
