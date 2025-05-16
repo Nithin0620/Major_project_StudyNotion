@@ -13,7 +13,7 @@ const IconBtn = ({
     <button 
       disabled={disabled}
       onClick={onClick}
-      className={`flex items-center ${
+      className={`flex hover:bg-yellow-100 hover:shadow-2xl shadow-yellow-5 hover:scale-95 transition-all duration-300 items-center ${
          outline ? "border border-yellow-50 bg-transparent" : "bg-yellow-50"
       } cursor-pointer gap-x-2 rounded-md py-2 px-2 font-semibold text-richblack-900 ${customeClasses}`}
       type={type}

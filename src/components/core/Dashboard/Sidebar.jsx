@@ -7,23 +7,23 @@ import { logout } from "../../../Services/operations/authAPI"
 import ConfirmationModal from "../../Common/ConfirmationModal"
 import SidebarLink from "./SidebarLink"
 
-export default function Sidebar() {
-  const { user, loading: profileLoading } = useSelector(
+export default function Sidebar() {  const { user, loading: profileLoading } = useSelector(
     (state) => state.profile
   )
   const { loading: authLoading } = useSelector((state) => state.auth)
-  const modalData = {
-                text1: "Are you sure?",
-                text2: "You will be logged out of your account.",
-                btn1Text: "Logout",
-                btn2Text: "Cancel",
-                btn1Handler: () => dispatch(logout(navigate)),
-                btn2Handler: () => setConfirmationModal(null),
-              };
   const dispatch = useDispatch()
   const navigate = useNavigate()
   // to keep track of confirmation modal
   const [confirmationModal, setConfirmationModal] = useState(null)
+  
+  const modalData = {
+    text1: "Are you sure?",
+    text2: "You will be logged out of your account.",
+    btn1Text: "Logout",
+    btn2Text: "Cancel",
+    btn1Handler: () => dispatch(logout(navigate)),
+    btn2Handler: () => setConfirmationModal(null),
+  }
 
   if (profileLoading || authLoading) {
     return (
@@ -35,7 +35,7 @@ export default function Sidebar() {
 
   return (
     <>
-      <div className="flex h-[calc(100vh-3.5rem)] min-w-[220px] flex-col border-r-[1px] border-r-richblack-700 bg-richblack-800 py-10">
+      <div className="flex h-[calc(100vh-3.5rem)] min-w-[220px] flex-col border-r-[1px] border-r-richblack-700  bg-richblack-800 py-10">
         <div className="flex flex-col">
           {sidebarLinks.map((link) => {
             if (link.type && user?.accountType !== link.type) return null

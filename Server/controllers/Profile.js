@@ -8,7 +8,7 @@ exports.updateProfile = async(req,res)=>{
 
       const id = req.user.id;
 
-      if(!contactNumber , !id , !gender){
+      if(!contactNumber || !id || !gender){
          return res.status(400).json({
             success:false,
             message:"all fields Are Required",
@@ -26,14 +26,16 @@ exports.updateProfile = async(req,res)=>{
 
       await profileDetails.save();
 
+      // Get the full user details including the updated profile
+      const updatedUser = await User.findById(id)
+         .populate("additionalDetails")
+         .exec();
+
       return res.status(200).json({
-         success:false,
-         message:"Profile Details saved",
-         profileDetails
+         success: true,
+         message: "Profile Details saved successfully",
+         profileDetails: updatedUser
       })
-
-
-
    }
    catch(e){
       return res.status(500).json({

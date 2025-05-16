@@ -18,7 +18,7 @@ export default function Cart() {
           <RenderTotalAmount />
         </div>
       ) : (
-        <p className="mt-14 text-center text-3xl text-richblack-100">
+        <p className="mt-14 grid place-items-center text-3xl text-richblack-100">
           Your cart is empty
         </p>
       )}
