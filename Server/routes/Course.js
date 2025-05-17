@@ -14,7 +14,7 @@ const {
 
 // Categories Controllers Import
 const {
-   showAllcategories,
+  showAllcategories,
   createCategory,
   categoryPageDetails,
 } = require("../controllers/Category")

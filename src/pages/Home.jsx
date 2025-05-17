@@ -34,6 +34,8 @@ const Home = () => {
           </div>
         </Link>
 
+        
+
         <div className="text-center text-4xl font-semibold mt-7">
           Empower Your Future with
           <HighlightText text={"Coding Skills "} />

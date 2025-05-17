@@ -4,6 +4,7 @@ import Logo1 from "../../../assets/TimeLineLogo/Logo1.svg"
 import Logo2 from "../../../assets/TimeLineLogo/Logo2.svg"
 import Logo3 from "../../../assets/TimeLineLogo/Logo3.svg"
 import Logo4 from "../../../assets/TimeLineLogo/Logo4.svg"
+// import ScrollReveal from './ScrollReveal';
 import timelineImage from "../../../assets/Images/TimelineImage.png"
 
 
@@ -33,6 +34,7 @@ const timeLine = [
 const TimelineSection = () => {
   return (
     <div>
+      
       <div className='flex flex-row gap-15 items-center'> 
          <div className='w-[53%] flex flex-col gap-5'>
             {
