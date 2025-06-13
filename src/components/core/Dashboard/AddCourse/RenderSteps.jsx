@@ -37,6 +37,12 @@ const RenderSteps = () => {
                             step > item.id ? (<FaCheck/>) :(item.id)
                         }
 
+
+
+                        <div className={`${step < 3 ? "opacity-100": "opacity-0"}`}>
+                            <p> ------------ </p>
+                        </div>  
+
                         </div>
                     </div>
                    {/* Add COde for dashes between the labels */}

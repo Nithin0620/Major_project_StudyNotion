@@ -12,7 +12,7 @@ const RequirementField = ({name, label, register, errors, setValue, getValues}) 
         })
     },[])
 
-    useEffect(()=> {
+    useEffect(()=> {  
         setValue(name, requirementList);
     },[requirementList])
 
