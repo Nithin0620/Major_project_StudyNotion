@@ -2,9 +2,8 @@ import { useForm } from "react-hook-form"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
-import { updateProfile } from "../../../../Services/operations/settingsAPI"
+import { updateProfile } from "../../../../services/operations/SettingsAPI"
 import IconBtn from "../../../Common/IconBtn"
-import toast from "react-hot-toast"
 
 const genders = ["Male", "Female", "Non-Binary", "Prefer not to say", "Other"]
 
@@ -19,15 +18,11 @@ export default function EditProfile() {
     handleSubmit,
     formState: { errors },
   } = useForm()
+
   const submitProfileForm = async (data) => {
     // console.log("Form Data - ", data)
     try {
-      const response = await dispatch(updateProfile(token, data))
-      console.log("Lo dekho response:",response)
-      if (response?.request?.statusText === "OK") {
-        // Profile updated successfully
-        navigate("/dashboard/my-profile")
-      }
+      dispatch(updateProfile(token, data))
     } catch (error) {
       console.log("ERROR MESSAGE - ", error.message)
     }
