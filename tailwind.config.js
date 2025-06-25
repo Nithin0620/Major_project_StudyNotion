@@ -6,23 +6,11 @@ module.exports = {
       inter: ["Inter", "sans-serif"],
       "edu-sa": ["Edu SA Beginner", "cursive"],
       mono: ["Roboto Mono", "monospace"],
-      dancing: ['"Dancing Script"', 'cursive'],
-      tegomin: ['"New Tegomin"', 'serif'],
-      playwrite: ['"Playwrite AU SA"', 'sans-serif'],
-      roboto: ['Roboto', 'sans-serif'],
     },
     colors: {
       white: "#fff",
       black: "#000",
       transparent: "#ffffff00",
-      teal:{
-        50:"#F0FDFA",
-
-      },
-      rose:{
-        50:"#FFF1F2",
-
-      },
       richblack: {
         5: "#F1F2FF",
         25: "#DBDDEA",

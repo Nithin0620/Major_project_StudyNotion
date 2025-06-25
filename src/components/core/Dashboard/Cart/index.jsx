@@ -1,10 +1,18 @@
 import { useSelector } from "react-redux"
 
 import RenderCartCourses from "./RenderCartCourses"
-import RenderTotalAmount from "./RenderTotalAmmount"
+import RenderTotalAmount from "./RenderTotalAmount"
 
 export default function Cart() {
   const { total, totalItems } = useSelector((state) => state.cart)
+  const { paymentLoading } = useSelector((state) => state.course)
+
+  if (paymentLoading)
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <div className="spinner"></div>
+      </div>
+    )
 
   return (
     <>
@@ -18,7 +26,7 @@ export default function Cart() {
           <RenderTotalAmount />
         </div>
       ) : (
-        <p className="mt-14 grid place-items-center text-3xl text-richblack-100">
+        <p className="mt-14 text-center text-3xl text-richblack-100">
           Your cart is empty
         </p>
       )}

@@ -2,12 +2,14 @@ import { useState } from "react"
 import { VscSignOut } from "react-icons/vsc"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
+
 import { sidebarLinks } from "../../../data/dashboard-links"
-import { logout } from "../../../Services/operations/authAPI"
+import { logout } from "../../../services/operations/authAPI"
 import ConfirmationModal from "../../Common/ConfirmationModal"
 import SidebarLink from "./SidebarLink"
 
-export default function Sidebar() {  const { user, loading: profileLoading } = useSelector(
+export default function Sidebar() {
+  const { user, loading: profileLoading } = useSelector(
     (state) => state.profile
   )
   const { loading: authLoading } = useSelector((state) => state.auth)
@@ -15,15 +17,6 @@ export default function Sidebar() {  const { user, loading: profileLoading } = u
   const navigate = useNavigate()
   // to keep track of confirmation modal
   const [confirmationModal, setConfirmationModal] = useState(null)
-  
-  const modalData = {
-    text1: "Are you sure?",
-    text2: "You will be logged out of your account.",
-    btn1Text: "Logout",
-    btn2Text: "Cancel",
-    btn1Handler: () => dispatch(logout(navigate)),
-    btn2Handler: () => setConfirmationModal(null),
-  }
 
   if (profileLoading || authLoading) {
     return (
@@ -35,7 +28,7 @@ export default function Sidebar() {  const { user, loading: profileLoading } = u
 
   return (
     <>
-      <div className="flex h-[calc(100vh-3.5rem)] min-w-[220px] flex-col border-r-[1px] border-r-richblack-700  bg-richblack-800 py-10">
+      <div className="flex h-[calc(100vh-3.5rem)] min-w-[220px] flex-col border-r-[1px] border-r-richblack-700 bg-richblack-800 py-10">
         <div className="flex flex-col">
           {sidebarLinks.map((link) => {
             if (link.type && user?.accountType !== link.type) return null
@@ -52,7 +45,14 @@ export default function Sidebar() {  const { user, loading: profileLoading } = u
           />
           <button
             onClick={() =>
-              setConfirmationModal(modalData)
+              setConfirmationModal({
+                text1: "Are you sure?",
+                text2: "You will be logged out of your account.",
+                btn1Text: "Logout",
+                btn2Text: "Cancel",
+                btn1Handler: () => dispatch(logout(navigate)),
+                btn2Handler: () => setConfirmationModal(null),
+              })
             }
             className="px-8 py-2 text-sm font-medium text-richblack-300"
           >

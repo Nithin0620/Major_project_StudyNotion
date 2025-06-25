@@ -1,36 +1,48 @@
-const express = require("express");
-const router= express.Router();
+// Import the required modules
+const express = require("express")
+const router = express.Router()
 
-
+// Import the required controllers and middleware functions
 const {
-   login,
-   signUP,
-   sendOTP,
-   changePassword,
-} = require("../controllers/Auth");
-
-
+  login,
+  signup,
+  sendotp,
+  changePassword,
+} = require("../controllers/Auth")
 const {
-   resetPasswordToken,
-   resetPassword,
-} = require("../controllers/ResetPassword");
+  resetPasswordToken,
+  resetPassword,
+} = require("../controllers/resetPassword")
 
-const {auth} = require("../midlewares/auth");
+const { auth } = require("../middleware/auth")
 
+// Routes for Login, Signup, and Authentication
 
+// ********************************************************************************************************
+//                                      Authentication routes
+// ********************************************************************************************************
 
-router.post("/login", login);
+// Route for user login
+router.post("/login", login)
 
-router.post("/signup" , signUP);
+// Route for user signup
+router.post("/signup", signup)
 
-router.post("/sendotp" , sendOTP);
+// Route for sending OTP to the user's email
+router.post("/sendotp", sendotp)
 
-router.post("/changepassword" , changePassword);
+// Route for Changing the password
+router.post("/changepassword", auth, changePassword)
 
+// ********************************************************************************************************
+//                                      Reset Password
+// ********************************************************************************************************
 
-router.post("/reset-password-token" , resetPasswordToken);
+// Route for generating a reset password token
+router.post("/reset-password-token", resetPasswordToken)
 
-router.post("/reset-password" , resetPassword);
+// Route for resetting user's password after verification
+router.post("/reset-password", resetPassword)
 
-
-module.exports = router;
+// Export the router for use in the main application
+module.exports = router
