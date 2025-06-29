@@ -9,7 +9,7 @@ import Course_Card from "../components/core/Catalog/Course_Card"
 import Course_Slider from "../components/core/Catalog/Course_Slider"
 import { apiConnector } from "../services/apiConnector"
 import { categories } from "../services/apis"
-import { getCatalogPageData } from "../services/operations/pageAndComponntDatas"
+import { getCatalogPageData } from "../Services/operations/pageAndComponntDatas"
 import Error from "./Error"
 
 function Catalog() {
