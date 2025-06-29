@@ -10,7 +10,7 @@ import { apiConnector } from "../../Services/apiConnector"
 import { categories } from "../../Services/apis"
 import { ACCOUNT_TYPE } from "../../utils/constants"
 
-import ProfileDropdown from "../core/Auth/ProfileDropDown"
+import ProfileDropdown from "../core/Auth/profileDropDown"
 
 // const subLinks = [
 //   {
