@@ -8,7 +8,7 @@ import Footer from "../components/Common/Footer"
 import Course_Card from "../components/core/Catalog/Course_Card"
 import Course_Slider from "../components/core/Catalog/Course_Slider"
 import { apiConnector } from "../Services/apiConnector"
-import { categories } from "../services/apis"
+import { categories } from "../Services/apis"
 import { getCatalogPageData } from "../Services/operations/pageAndComponntDatas"
 import Error from "./Error"
 

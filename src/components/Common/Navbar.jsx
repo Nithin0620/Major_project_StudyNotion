@@ -7,7 +7,7 @@ import { Link, matchPath, useLocation } from "react-router-dom"
 import logo from "../../assets/Logo/Logo-Full-Light.png"
 import { NavbarLinks } from "../../data/navbar-links"
 import { apiConnector } from "../../Services/apiConnector"
-import { categories } from "../../services/apis"
+import { categories } from "../../Services/apis"
 import { ACCOUNT_TYPE } from "../../utils/constants"
 import ProfileDropdown from "../core/Auth/ProfileDropdown"
 
