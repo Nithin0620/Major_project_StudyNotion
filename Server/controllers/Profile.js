@@ -116,20 +116,34 @@ exports.getAllUserDetails = async (req, res) => {
 
 exports.updateDisplayPicture = async (req, res) => {
   try {
-    const displayPicture = req.files.displayPicture
+    const displayPicture = req.files?.displayPicture
     const userId = req.user.id
+    
+    if (!displayPicture) {
+      return res.status(400).json({
+        success: false,
+        message: "No file uploaded",
+      })
+    }
+    
+    console.log("data",displayPicture,
+      process.env.FOLDER_NAME,
+      1000,
+      1000)
     const image = await uploadImageToCloudinary(
       displayPicture,
       process.env.FOLDER_NAME,
       1000,
       1000
     )
+    console.log("Done 1");
     console.log(image)
     const updatedProfile = await User.findByIdAndUpdate(
       { _id: userId },
       { image: image.secure_url },
       { new: true }
     )
+    console.log("Done 2");
     res.send({
       success: true,
       message: `Image Updated successfully`,
