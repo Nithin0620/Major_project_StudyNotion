@@ -2,4 +2,4 @@
 
 #Project Deployed on Render.com
 
-you can find deployment here: https://study-notion-mqq9.onrender.com/
+you can find deployment here: https://major-project-study-notion.vercel.app/
