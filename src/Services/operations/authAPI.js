@@ -18,11 +18,23 @@ export function sendOtp(email, navigate) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...")
     dispatch(setLoading(true))
+    
+    let serverStartupToastId = null
+    const serverStartupTimer = setTimeout(() => {
+      serverStartupToastId = toast.loading("Server is starting up. This may take a moment.")
+    }, 4000)
+    
     try {
       const response = await apiConnector("POST", SENDOTP_API, {
         email,
         checkUserPresent: true,
       })
+      
+      clearTimeout(serverStartupTimer)
+      if (serverStartupToastId) {
+        toast.dismiss(serverStartupToastId)
+      }
+      
       console.log("SENDOTP API RESPONSE............", response)
 
       console.log(response.data.success)
@@ -34,6 +46,11 @@ export function sendOtp(email, navigate) {
       toast.success("OTP Sent Successfully")
       navigate("/verify-email")
     } catch (error) {
+      clearTimeout(serverStartupTimer)
+      if (serverStartupToastId) {
+        toast.dismiss(serverStartupToastId)
+      }
+      
       console.log("api endpoint",SENDOTP_API);
       console.log("SENDOTP API ERROR............", error)
       toast.error("Could Not Send OTP")
@@ -88,11 +105,22 @@ export function login(email, password, navigate) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...")
     dispatch(setLoading(true))
+    
+    let serverStartupToastId = null
+    const serverStartupTimer = setTimeout(() => {
+      serverStartupToastId = toast.loading("Server is starting up. This may take a moment.")
+    }, 4000)
+    
     try {
       const response = await apiConnector("POST", LOGIN_API, {
         email,
         password,
       })
+
+      clearTimeout(serverStartupTimer)
+      if (serverStartupToastId) {
+        toast.dismiss(serverStartupToastId)
+      }
 
       console.log("LOGIN API RESPONSE............", response)
 
@@ -109,6 +137,11 @@ export function login(email, password, navigate) {
       localStorage.setItem("token", JSON.stringify(response.data.token))
       navigate("/dashboard/my-profile")
     } catch (error) {
+      clearTimeout(serverStartupTimer)
+      if (serverStartupToastId) {
+        toast.dismiss(serverStartupToastId)
+      }
+      
       console.log("LOGIN API ERROR............", error)
       toast.error("Login Failed")
     }
