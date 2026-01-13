@@ -12,24 +12,36 @@ import { ACCOUNT_TYPE } from "../../utils/constants"
 
 import ProfileDropdown from "../core/Auth/profileDropDown"
 
-// const subLinks = [
-//   {
-//     title: "Python",
-//     link: "/catalog/python",
-//   },
-//   {
-//     title: "javascript",
-//     link: "/catalog/javascript",
-//   },
-//   {
-//     title: "web-development",
-//     link: "/catalog/web-development",
-//   },
-//   {
-//     title: "Android Development",
-//     link: "/catalog/Android Development",
-//   },
-// ];
+const subLinksCache = [
+  {
+    title: "DevOps",
+    link: "/catalog/devops",
+  },
+  {
+    title: "GitOps",
+    link: "/catalog/devops",
+  },
+  {
+    title: "Ai/Ml",
+    link: "/catalog/devops",
+  },
+  {
+    title: "Python",
+    link: "/catalog/devops",
+  },
+  {
+    title: "javascript",
+    link: "/catalog/devops",
+  },
+  {
+    title: "web-development",
+    link: "/catalog/devops",
+  },
+  {
+    title: "Android Development",
+    link: "/catalog/devops",
+  },
+];
 
 function Navbar() {
   const { token } = useSelector((state) => state.auth)
@@ -39,15 +51,26 @@ function Navbar() {
 
   const [subLinks, setSubLinks] = useState([])
   const [loading, setLoading] = useState(false)
+  const [serverStartupMessage, setServerStartupMessage] = useState(false)
 
   useEffect(() => {
     ;(async () => {
       setLoading(true)
+      setServerStartupMessage(false)
+      
+      const timer = setTimeout(() => {
+        setServerStartupMessage(true)
+      }, 4000)
+      
       try {
         const res = await apiConnector("GET", categories.CATEGORIES_API)
-        console.log("The catelog course categories",res);
+        clearTimeout(timer)
+        setServerStartupMessage(false)
+        // console.log("The catelog course categories",res);
         setSubLinks(res.data.data)
       } catch (error) {
+        clearTimeout(timer)
+        setServerStartupMessage(false)
         console.log("Could not fetch Categories.", error)
       }
       setLoading(false)
@@ -90,7 +113,7 @@ function Navbar() {
                       <div className="invisible absolute left-[50%] top-[50%] z-[1000] flex w-[200px] translate-x-[-50%] translate-y-[3em] flex-col rounded-lg bg-richblack-5 p-4 text-richblack-900 opacity-0 transition-all duration-150 group-hover:visible group-hover:translate-y-[1.65em] group-hover:opacity-100 lg:w-[300px]">
                         <div className="absolute left-[50%] top-0 -z-10 h-6 w-6 translate-x-[80%] translate-y-[-40%] rotate-45 select-none rounded bg-richblack-5"></div>
                         {loading ? (
-                          <p className="text-center">Loading...</p>
+                          <p className="text-center">{serverStartupMessage ? "Server is starting up to fetch Data. This may take a moment." : "Loading..."}</p>
                         ) : subLinks.length ? (
                           <>
                             {subLinks
