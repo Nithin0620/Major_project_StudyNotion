@@ -1,6 +1,6 @@
 import { toast } from "react-hot-toast"
 
-import { setLoading, setUser } from "../../slices/profileSlice"
+import { setLoading, setUser, setServerStartupMessage } from "../../slices/profileSlice"
 import { apiConnector } from "../apiConnector"
 import { profileEndpoints } from "../apis"
 import { logout } from "./authAPI"
@@ -15,10 +15,21 @@ export function getUserDetails(token, navigate) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...")
     dispatch(setLoading(true))
+    dispatch(setServerStartupMessage(false))
+    
+    let serverStartupTimer = null
+    serverStartupTimer = setTimeout(() => {
+      dispatch(setServerStartupMessage(true))
+    }, 4000)
+    
     try {
       const response = await apiConnector("GET", GET_USER_DETAILS_API, null, {
         Authorization: `Bearer ${token}`,
       })
+      
+      clearTimeout(serverStartupTimer)
+      dispatch(setServerStartupMessage(false))
+      
       console.log("GET_USER_DETAILS API RESPONSE............", response)
 
       if (!response.data.success) {
@@ -29,6 +40,8 @@ export function getUserDetails(token, navigate) {
         : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.data.firstName} ${response.data.data.lastName}`
       dispatch(setUser({ ...response.data.data, image: userImage }))
     } catch (error) {
+      clearTimeout(serverStartupTimer)
+      dispatch(setServerStartupMessage(false))
       dispatch(logout(navigate))
       console.log("GET_USER_DETAILS API ERROR............", error)
       toast.error("Could Not Get User Details")

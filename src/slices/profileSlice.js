@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
   user: null,
   loading: false,
+  serverStartupMessage: false,
 }
 
 const profileSlice = createSlice({
@@ -15,9 +16,12 @@ const profileSlice = createSlice({
     setLoading(state, value) {
       state.loading = value.payload
     },
+    setServerStartupMessage(state, value) {
+      state.serverStartupMessage = value.payload
+    },
   },
 })
 
-export const { setUser, setLoading } = profileSlice.actions
+export const { setUser, setLoading, setServerStartupMessage } = profileSlice.actions
 
 export default profileSlice.reducer
