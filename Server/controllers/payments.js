@@ -12,6 +12,7 @@ const CourseProgress = require("../models/CourseProgress")
 
 // Capture the payment and initiate the Razorpay order
 exports.capturePayment = async (req, res) => {
+  // console.log("first")
   const { courses } = req.body
   const userId = req.user.id
   if (courses.length === 0) {
@@ -48,7 +49,7 @@ exports.capturePayment = async (req, res) => {
       return res.status(500).json({ success: false, message: error.message })
     }
   }
-
+  // console.log("second")
   const options = {
     amount: total_amount * 100,
     currency: "INR",
@@ -57,11 +58,12 @@ exports.capturePayment = async (req, res) => {
 
   try {
     // Initiate the payment using Razorpay
+    // console.log("third")
     const paymentResponse = await instance.orders.create(options)
-    console.log(paymentResponse)
+    // console.log(paymentResponse);
     res.json({
       success: true,
-      data: paymentResponse,
+      data: { paymentResponse, RAZORPAY_KEY: process.env.RAZORPAY_KEY },
     })
   } catch (error) {
     console.log(error)
